@@ -79,12 +79,8 @@ public class UserController {
         //从Session中获取保存的验证码
         //Object codeInSession = session.getAttribute(phone);
 
-        //将生成的验证码缓存到Redis中，并且设置有效期为5分钟
-        redisTemplate.opsForValue().set(phone,"1234",5,TimeUnit.MINUTES);
-
         //从Redis中获取缓存的验证码
         Object codeInSession = redisTemplate.opsForValue().get(phone);
-        //codeInSession = "1234";
 
         //进行验证码的比对（页面提交的验证码和Session中保存的验证码比对）
         if(codeInSession != null && codeInSession.equals(code)){
